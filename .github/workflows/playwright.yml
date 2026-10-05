@@ -54,7 +54,7 @@ jobs:
 
       - name: Generate OpenAPI client
         run: |
-          npx @openapitools/openapi-generator-cli generate \
+          npx openapi-generator-cli generate \
             -i http://localhost:8080/v3/api-docs \
             -g typescript-fetch \
             -o ./openapi

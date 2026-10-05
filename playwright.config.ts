@@ -6,16 +6,7 @@ export default defineConfig({
   retries: process.env.CI ? 0 : 0,
   workers: process.env.CI ? 4 : 4,
 
-  reporter: [
-    ['line'],
-    [
-      'playwright-testreport-io/reporter',
-      {
-        outputDir: 'testreport',
-        fileName: 'results.json',
-      },
-    ],
-  ],
+  reporter: [['line'], ['html']],
 
   use: {
     baseURL: 'https://www.morosystems.cz',
