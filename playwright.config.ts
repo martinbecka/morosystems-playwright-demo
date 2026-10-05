@@ -5,7 +5,7 @@ export default defineConfig({
   fullyParallel: true,
   retries: process.env.CI ? 0 : 0,
   workers: process.env.CI ? 4 : 4,
-
+  snapshotPathTemplate: './snapshots/{platform}/{testFileName}/{projectName}/{arg}{ext}',
   reporter: [['line'], ['html']],
 
   use: {
