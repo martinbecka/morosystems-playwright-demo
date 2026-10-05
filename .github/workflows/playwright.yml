@@ -20,13 +20,13 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: Dependencies
+      - name: Install dependencies
         run: npm ci
 
       - name: Build backend Docker image
         run: |
           docker build \
-            -f Dockerfile.backend \
+            -f docker/Dockerfile.backend \
             -t backend .
 
       - name: Start backend
@@ -58,7 +58,7 @@ jobs:
             -i http://localhost:8080/v3/api-docs \
             -g typescript-fetch \
             -o ./openapi
-      
+
       - name: Quality checks
         run: npm run quality
 
