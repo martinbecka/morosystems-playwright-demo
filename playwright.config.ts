@@ -1,0 +1,70 @@
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './tests',
+  fullyParallel: true,
+  retries: process.env.CI ? 0 : 0,
+  workers: process.env.CI ? 4 : 4,
+
+  reporter: [
+    ['line'],
+    [
+      'playwright-testreport-io/reporter',
+      {
+        outputDir: 'testreport',
+        fileName: 'results.json',
+      },
+    ],
+  ],
+
+  use: {
+    baseURL: 'https://www.morosystems.cz',
+    screenshot: 'only-on-failure',
+    trace: 'on-first-retry',
+  },
+
+  projects: [
+    {
+      name: 'REST API',
+      testMatch: '**/tests/rest/**/*.spec.ts',
+      workers: 1,
+      use: {
+        baseURL: 'http://localhost:8080',
+      },
+    },
+    {
+      name: 'Firefox',
+      testMatch: '**/tests/gui/**/*.spec.ts',
+      use: {
+        ...devices['Desktop Firefox'],
+        viewport: { width: 1920, height: 1080 },
+      },
+    },
+    {
+      name: 'WebKit',
+      testMatch: '**/tests/gui/**/*.spec.ts',
+      use: {
+        ...devices['Desktop Safari'],
+        viewport: { width: 1920, height: 1080 },
+      },
+    },
+    {
+      name: 'Edge',
+      testMatch: '**/tests/gui/**/*.spec.ts',
+      use: {
+        ...devices['Desktop Edge'],
+        channel: 'msedge',
+        viewport: { width: 1920, height: 1080 },
+      },
+    },
+    {
+      name: 'Chrome',
+      testMatch: '**/tests/gui/**/*.spec.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+        channel: 'chrome',
+        viewport: { width: 1920, height: 1080 },
+      },
+    },
+  ],
+});

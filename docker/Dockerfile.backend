@@ -1,0 +1,14 @@
+FROM node:22-alpine
+
+RUN apk add --no-cache git
+
+WORKDIR /app
+
+ARG REPO_URL=https://github.com/morosystems/todo-be.git
+ARG REPO_BRANCH=master
+
+RUN git clone --branch ${REPO_BRANCH} ${REPO_URL} .
+
+RUN npm install
+
+CMD ["npm", "start"]
