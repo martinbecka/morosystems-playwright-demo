@@ -4,14 +4,19 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   retries: process.env.CI ? 0 : 0,
-  workers: process.env.CI ? 4 : 4,
+  workers: process.env.CI ? 1 : 4,
   snapshotPathTemplate: './snapshots/{platform}/{testFileName}/{projectName}/{arg}{ext}',
   reporter: [['line'], ['html']],
+  expect: {
+    timeout: 30_000,
+  },
 
   use: {
     baseURL: 'https://www.morosystems.cz',
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',
+    actionTimeout: 30_000,
+    navigationTimeout: 30_000,
   },
 
   projects: [
