@@ -23,9 +23,6 @@ jobs:
       - name: Dependencies
         run: npm ci
 
-      - name: Quality checks
-        run: npm run quality
-
       - name: Build backend Docker image
         run: |
           docker build \
@@ -61,6 +58,9 @@ jobs:
             -i http://localhost:8080/v3/api-docs \
             -g typescript-fetch \
             -o ./openapi
+      
+      - name: Quality checks
+        run: npm run quality
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
