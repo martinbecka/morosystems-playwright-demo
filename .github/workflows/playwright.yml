@@ -24,10 +24,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: 24
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Install browsers
+        run: npx playwright install --with-deps
 
       - name: Build backend Docker image
         run: |
@@ -59,17 +62,10 @@ jobs:
           exit 1
 
       - name: Generate OpenAPI client
-        run: |
-          npx openapi-generator-cli generate \
-            -i http://localhost:8080/v3/api-docs \
-            -g typescript-fetch \
-            -o ./openapi
+        run: npm run generate:openapi
 
       - name: Quality checks
         run: npm run quality
-
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
 
       - name: Run Playwright tests
         run: |

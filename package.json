@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generate:openapi": "openapi-generator-cli generate -i http://localhost:8080/v3/api-docs -g typescript-fetch -o ./openapi",
     "format": "prettier --write . --ignore-path .gitignore",
     "format:check": "prettier --check . --ignore-path .gitignore",
     "lint": "eslint .",
@@ -31,5 +32,8 @@
     "printWidth": 100,
     "tabWidth": 2,
     "useTabs": false
+  },
+  "overrides": {
+    "basic-ftp": "6.2.1"
   }
 }
