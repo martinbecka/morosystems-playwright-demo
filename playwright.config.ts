@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
-  retries: process.env.CI ? 0 : 0,
+  retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : 4,
   snapshotPathTemplate: './snapshots/{platform}/{testFileName}/{projectName}/{arg}{ext}',
   reporter: [['line'], ['html']],
