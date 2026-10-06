@@ -86,7 +86,7 @@ morosystems-playwright-demo/
 - [x] 1. Start Backend Application: Checkout and install and run our Backend application. Instructions can be found here: GitHub - morosystems/todo-be: Simple backend for todo app.
 - [x] 2. Retrieve Task List: Send a GET request to your API endpoint that retrieves a list of tasks.
 - [x] 3. Create New Task: Send a POST request to your API endpoint to create a new task.
-- [x] 4. Update Task Information: Send a PUT request to update an existing task's information.
+- [ ] 4. Update Task Information: Send a PUT request to update an existing task's information.
 - [x] 5. Delete Task: Send a DELETE request to remove a task.
 
 ### Complexity Additions:
