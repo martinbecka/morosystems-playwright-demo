@@ -1,4 +1,4 @@
-import { test, expect } from '../../../fixtures/tasks.fixture';
+import { test, expect } from '../../../../fixtures/tasks.fixture';
 
 test.describe('GET /tasks/completed', () => {
   test('200 - Returns empty array when no tasks are completed', async ({ api }) => {

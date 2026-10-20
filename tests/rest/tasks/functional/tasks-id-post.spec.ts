@@ -1,7 +1,7 @@
 /* eslint-disable playwright/no-conditional-expect */
 
-import { test, expect } from '../../../fixtures/tasks.fixture';
-import { ResponseError } from '../../../openapi';
+import { test, expect } from '../../../../fixtures/tasks.fixture';
+import { ResponseError } from '../../../../openapi';
 
 test.describe('POST /tasks/{id}', () => {
   test('200 - Update task', async ({ api }) => {

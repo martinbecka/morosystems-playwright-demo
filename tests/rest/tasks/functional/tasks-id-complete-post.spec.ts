@@ -1,39 +1,36 @@
 /* eslint-disable playwright/no-conditional-expect */
 
-import { test, expect } from '../../../fixtures/tasks.fixture';
-import { ResponseError } from '../../../openapi';
+import { test, expect } from '../../../../fixtures/tasks.fixture';
+import { ResponseError } from '../../../../openapi';
 
-test.describe('POST /tasks/{id}/incomplete', () => {
-  test('200 - Incomplete task', async ({ api }) => {
+test.describe('POST /tasks/{id}/complete', () => {
+  test('200 - Complete task', async ({ api }) => {
     const createResponse = await api.tasksPostRaw({
       createTask: { text: 'string' },
     });
 
     const task = await createResponse.value();
 
-    await api.tasksIdCompletePostRaw({
+    const completeResponse = await api.tasksIdCompletePostRaw({
       id: task.id,
     });
 
-    const incompleteResponse = await api.tasksIdIncompletePostRaw({
-      id: task.id,
-    });
+    expect(completeResponse.raw.status).toBe(200);
 
-    expect(incompleteResponse.raw.status).toBe(200);
+    const completeTask = await completeResponse.value();
 
-    const incompleteTask = await incompleteResponse.value();
-
-    expect(incompleteTask).toEqual({
+    expect(completeTask).toEqual({
       id: task.id,
       text: 'string',
-      completed: false,
+      completed: true,
+      completedDate: expect.any(Number),
       createdDate: expect.any(Number),
     });
   });
 
   test('404 - Wrong Id', async ({ api }) => {
     try {
-      await api.tasksIdIncompletePostRaw({
+      await api.tasksIdCompletePostRaw({
         id: 'nonexistent-id-000000',
       });
     } catch (error) {

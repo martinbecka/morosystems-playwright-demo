@@ -1,7 +1,7 @@
 /* eslint-disable playwright/no-conditional-expect */
 
-import { test, expect } from '../../../fixtures/tasks.fixture';
-import { ResponseError } from '../../../openapi';
+import { test, expect } from '../../../../fixtures/tasks.fixture';
+import { ResponseError } from '../../../../openapi';
 
 test.describe('DELETE /tasks/{id}', () => {
   test('200 - Delete task', async ({ api }) => {
